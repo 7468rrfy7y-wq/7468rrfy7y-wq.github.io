@@ -1,0 +1,30 @@
+{
+  "updated": "2026-11-17",
+  "note": "해지 경로는 각 회사 공식 도움말 기준이에요. 화면은 업데이트로 바뀔 수 있으니 안 보이면 '도움말'을 눌러 확인하세요. 요금은 회사·가입 경로마다 달라서 직접 적어 주세요.",
+  "catalog": [
+    { "id": "netflix", "name": "넷플릭스", "cat": "OTT",
+      "cancel_url": "https://www.netflix.com/cancelplan",
+      "steps": "netflix.com/cancelplan 접속 → 해지 완료하기. 앱 삭제·로그아웃만으로는 해지되지 않아요.",
+      "help": "https://help.netflix.com/ko/node/407" },
+    { "id": "youtube", "name": "유튜브 프리미엄", "cat": "OTT",
+      "cancel_url": "https://www.youtube.com/paid_memberships",
+      "steps": "웹 가입: youtube.com/paid_memberships에서 관리. 구글 플레이 결제면 플레이 스토어 구독에서, 아이폰 앱 결제면 Apple 구독에서 취소.",
+      "help": "https://support.google.com/youtube/answer/6308278?hl=ko" },
+    { "id": "coupang", "name": "쿠팡 와우", "cat": "쇼핑",
+      "cancel_url": "https://www.coupang.com",
+      "steps": "쿠팡 앱 → 마이쿠팡 → 설정 → 와우 멤버십 → 해지하기 → 해지 신청 완료하기 (2단계).",
+      "help": "https://economist.co.kr/article/view/ecn202512120052" },
+    { "id": "chatgpt", "name": "ChatGPT 유료 플랜", "cat": "AI",
+      "cancel_url": "https://chatgpt.com",
+      "steps": "웹 가입이면 ChatGPT 계정 설정에서, 앱 결제면 구글 플레이 또는 Apple 구독에서 취소. 취소해도 이미 낸 요금이 자동 환불되지는 않아요.",
+      "help": "https://help.openai.com/ko-kr/articles/7232927-canceling-your-chatgpt-subscription" },
+    { "id": "gplay", "name": "구글 플레이 앱 구독 (전체)", "cat": "앱스토어",
+      "cancel_url": "https://play.google.com/store/account/subscriptions",
+      "steps": "플레이 스토어 → 프로필 → 결제 및 정기 결제 → 정기 결제 → 해당 앱 → 정기 결제 취소.",
+      "help": "https://support.google.com/googleplay/answer/7018481?hl=KO" },
+    { "id": "apple", "name": "Apple 구독 (전체)", "cat": "앱스토어",
+      "cancel_url": "https://account.apple.com",
+      "steps": "아이폰 설정 → 사용자 이름 → 구독 → 해당 구독 → 구독 취소. 웹은 account.apple.com.",
+      "help": "https://support.apple.com/ko-kr/HT4098" }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "updated": "2026-11-17",
+  "basis": "미국 국립보건원(NIH) 식이보충제국(ODS)·미국 국립학술원 상한섭취량(UL), 성인 19세 이상 기준",
+  "nutrients": [
+    { "id": "vitA", "name": "비타민 A", "unit": "μg", "ul": 3000, "note": "레티놀 등 '이미 만들어진' 비타민 A에만 적용 (베타카로틴 제외)", "src": "https://www.ncbi.nlm.nih.gov/books/NBK56068/table/summarytables.t7/?report=objectonly" },
+    { "id": "vitC", "name": "비타민 C", "unit": "mg", "ul": 2000, "src": "https://www.ncbi.nlm.nih.gov/books/NBK56068/table/summarytables.t7/?report=objectonly" },
+    { "id": "vitD", "name": "비타민 D", "unit": "μg", "ul": 100, "iu": 40, "note": "라벨이 IU면 40으로 나누면 μg (4,000 IU = 100μg)", "src": "https://www.ncbi.nlm.nih.gov/books/NBK56068/table/summarytables.t7/?report=objectonly" },
+    { "id": "vitE", "name": "비타민 E", "unit": "mg", "ul": 1000, "note": "영양제로 먹는 알파토코페롤 기준", "src": "https://www.ncbi.nlm.nih.gov/books/NBK56068/table/summarytables.t7/?report=objectonly" },
+    { "id": "niacin", "name": "나이아신 (B3)", "unit": "mg", "ul": 35, "note": "영양제·강화식품 속 합성 형태에만 적용", "src": "https://www.ncbi.nlm.nih.gov/books/NBK56068/table/summarytables.t7/?report=objectonly" },
+    { "id": "b6", "name": "비타민 B6", "unit": "mg", "ul": 100, "src": "https://www.ncbi.nlm.nih.gov/books/NBK56068/table/summarytables.t7/?report=objectonly" },
+    { "id": "folate", "name": "엽산", "unit": "μg", "ul": 1000, "note": "영양제·강화식품 속 합성 엽산에만 적용", "src": "https://www.ncbi.nlm.nih.gov/books/NBK56068/table/summarytables.t7/?report=objectonly" },
+    { "id": "calcium", "name": "칼슘", "unit": "mg", "ul": 2500, "ul51": 2000, "note": "51세 이상은 2,000mg", "src": "https://www.ncbi.nlm.nih.gov/books/NBK545442/table/appJ_tab9/?report=objectonly" },
+    { "id": "iron", "name": "철", "unit": "mg", "ul": 45, "src": "https://www.ncbi.nlm.nih.gov/books/NBK545442/table/appJ_tab9/?report=objectonly" },
+    { "id": "zinc", "name": "아연", "unit": "mg", "ul": 40, "src": "https://www.ncbi.nlm.nih.gov/books/NBK545442/table/appJ_tab9/?report=objectonly" },
+    { "id": "magnesium", "name": "마그네슘", "unit": "mg", "ul": 350, "note": "영양제·약으로 먹는 양에만 적용 (음식 제외)", "src": "https://www.ncbi.nlm.nih.gov/books/NBK545442/table/appJ_tab9/?report=objectonly" },
+    { "id": "selenium", "name": "셀레늄", "unit": "μg", "ul": 400, "src": "https://www.ncbi.nlm.nih.gov/books/NBK545442/table/appJ_tab9/?report=objectonly" },
+    { "id": "copper", "name": "구리", "unit": "μg", "ul": 10000, "note": "10,000μg = 10mg", "src": "https://www.ncbi.nlm.nih.gov/books/NBK545442/table/appJ_tab9/?report=objectonly" },
+    { "id": "iodine", "name": "요오드", "unit": "μg", "ul": 1100, "src": "https://www.ncbi.nlm.nih.gov/books/NBK545442/table/appJ_tab9/?report=objectonly" }
+  ],
+  "pairs": [
+    { "a": "calcium", "b": "iron", "level": "split", "title": "칼슘 ↔ 철: 시간 띄우기",
+      "text": "칼슘이 철 흡수를 줄일 수 있다는 보고가 있어요. 효과가 확정된 건 아니지만, 다른 시간에 먹으라고 권하는 전문가가 있어요.",
+      "src": "https://ods.od.nih.gov/factsheets/Iron-HealthProfessional/" },
+    { "a": "iron", "b": "zinc", "level": "split", "minA": 25, "title": "철(25mg 이상) ↔ 아연: 같이 먹지 않기",
+      "text": "철 25mg 이상 영양제를 아연 영양제와 같은 시간에 먹으면 아연 흡수가 줄어요.",
+      "src": "https://ods.od.nih.gov/factsheets/Zinc-HealthProfessional/" },
+    { "a": "vitC", "b": "iron", "level": "good", "title": "비타민 C + 철: 같이 먹으면 도움",
+      "text": "비타민 C는 식물성(비헴) 철의 흡수를 높여요.",
+      "src": "https://ods.od.nih.gov/factsheets/Iron-HealthProfessional/" }
+  ],
+  "singles": [
+    { "id": "zinc", "min": 50, "level": "warn", "title": "아연 하루 50mg 이상",
+      "text": "몇 주 이상 하루 50mg 이상 먹으면 구리 흡수를 방해할 수 있어요.",
+      "src": "https://ods.od.nih.gov/factsheets/Zinc-HealthProfessional/" },
+    { "id": "iron", "min": 45, "level": "warn", "title": "철 하루 45mg 이상",
+      "text": "고용량 철(하루 45mg 이상)은 메스꺼움·변비 같은 위장 증상을 일으킬 수 있어요.",
+      "src": "https://ods.od.nih.gov/factsheets/Iron-HealthProfessional/" },
+    { "id": "calcium", "min": 501, "level": "tip", "title": "칼슘은 나눠 먹기",
+      "text": "영양제 칼슘은 한 번에 500mg 이하일 때 흡수율이 가장 높아요. 양이 많으면 나눠 드세요.",
+      "src": "https://ods.od.nih.gov/factsheets/Calcium-HealthProfessional/" }
+  ],
+  "timing": [
+    { "id": "calcium", "text": "탄산칼슘은 식사와 함께, 구연산칼슘은 공복도 괜찮아요. 칼슘 영양제는 대체로 식사와 함께일 때 흡수가 더 좋아요.",
+      "src": "https://ods.od.nih.gov/factsheets/Calcium-HealthProfessional/" },
+    { "id": "iron", "text": "공복에 먹으면 속이 불편할 수 있어요. 불편하면 음식과 함께 드세요.",
+      "src": "https://ods.od.nih.gov/factsheets/Iron-HealthProfessional/" }
+  ],
+  "drugs": [
+    { "id": "levo", "name": "갑상선약 (레보티록신)" },
+    { "id": "abx", "name": "항생제 (퀴놀론·테트라사이클린 계열)" },
+    { "id": "bis", "name": "골다공증약 (비스포스포네이트, 예: 알렌드로네이트)" },
+    { "id": "levodopa", "name": "파킨슨약 (레보도파)" },
+    { "id": "ppi", "name": "위산억제제 (PPI, 예: 오메프라졸)" },
+    { "id": "penicillamine", "name": "페니실라민" }
+  ],
+  "drugRules": [
+    { "drug": "levo", "n": "iron", "text": "철 영양제와 4시간 이상 띄우세요 (약 라벨 권고).", "src": "https://ods.od.nih.gov/factsheets/Iron-HealthProfessional/" },
+    { "drug": "levo", "n": "calcium", "text": "탄산칼슘과 4시간 이상 띄우세요 (약 라벨 권고).", "src": "https://ods.od.nih.gov/factsheets/Calcium-HealthProfessional/" },
+    { "drug": "abx", "n": "zinc", "text": "항생제를 아연보다 최소 2시간 먼저, 또는 4~6시간 뒤에 드세요.", "src": "https://ods.od.nih.gov/factsheets/Zinc-HealthProfessional/" },
+    { "drug": "abx", "n": "magnesium", "text": "항생제를 마그네슘보다 최소 2시간 먼저, 또는 4~6시간 뒤에 드세요.", "src": "https://ods.od.nih.gov/factsheets/Magnesium-HealthProfessional/" },
+    { "drug": "abx", "n": "calcium", "text": "퀴놀론 항생제는 칼슘 영양제와 앞뒤 2시간 띄우세요.", "src": "https://ods.od.nih.gov/factsheets/Calcium-HealthProfessional/" },
+    { "drug": "bis", "n": "magnesium", "text": "골다공증약과 마그네슘은 앞뒤 최소 2시간 띄우세요.", "src": "https://ods.od.nih.gov/factsheets/Magnesium-HealthProfessional/" },
+    { "drug": "levodopa", "n": "iron", "text": "철 영양제가 레보도파 흡수를 줄일 수 있어요. 복용 시간을 의사·약사와 정하세요.", "src": "https://ods.od.nih.gov/factsheets/Iron-HealthProfessional/" },
+    { "drug": "ppi", "n": "iron", "text": "위산억제제는 철 흡수를 줄일 수 있어요. 철이 부족한 분은 의사와 상의하세요.", "src": "https://ods.od.nih.gov/factsheets/Iron-HealthProfessional/" },
+    { "drug": "penicillamine", "n": "zinc", "text": "아연과 페니실라민은 최소 1시간 띄우세요.", "src": "https://ods.od.nih.gov/factsheets/Zinc-HealthProfessional/" }
+  ],
+  "apap": {
+    "max": 4000,
+    "text": "아세트아미노펜은 하루 최대 4,000mg을 넘으면 간 손상이 생길 수 있고, 이 성분이 든 다른 약과 함께 먹으면 안 된다고 허가 라벨에 적혀 있어요. 종합감기약 속에도 들어 있으니 성분표를 확인하세요.",
+    "src": "https://health.kr/drug/A11ABBBBB1267"
+  }
+}
