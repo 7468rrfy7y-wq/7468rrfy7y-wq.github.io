@@ -1,0 +1,133 @@
+{
+  "week": "2026-11-16",
+  "updated": "2026-11-17T08:00:00+09:00",
+  "note": "보도자료·기사에 나온 사실만 정리. 효과를 단정하지 않으며, 논문 수치는 그 연구의 조건(농도·기간·인원)에서 나온 결과입니다.",
+  "items": [
+    {
+      "id": "2026w47-001",
+      "store": "올리브영",
+      "brand": "일리윤",
+      "name": "멀티베리어 페이셜 리페어 크림",
+      "category": "보습",
+      "price": null,
+      "release_date": "2026-11-16",
+      "key_ingredients": [
+        {
+          "name": "덱스판테놀",
+          "concentration": "5%",
+          "concentration_listed": true,
+          "dalton_note": "분자량 약 205 → 500달톤보다 작음 (피부 통과 기준 안쪽)",
+          "paper": "Proksch 외(2017 리뷰)에 정리된 무작위 연구: 2.5·5% 덱스판테놀 유화제, 건강한 20명 — 반복 세정 후 각질층 수분·장벽 기능이 바탕제보다 유의하게 좋아짐"
+        },
+        {
+          "name": "식물성 PDRN",
+          "concentration": null,
+          "concentration_listed": false,
+          "dalton_note": "DNA 조각이라 분자가 큼. '연어 PDRN보다 약 20배 작다'는 회사 설명뿐, 분자량 수치 미공개",
+          "paper": "바르는 PDRN의 사람 대상 근거는 아직 약함"
+        }
+      ],
+      "verdict": "농도가 적힌 덱스판테놀 5%는 논문 농도와 같음 → 보습·장벽 목적이면 근거 있는 편 / PDRN은 농도 미표기라 판단 보류",
+      "source_url": "https://www.newswire.co.kr/newsRead.php?no=1047259"
+    },
+    {
+      "id": "2026w45-101",
+      "store": "다이소",
+      "brand": "닥터씨피유",
+      "name": "락토엑소좀 캡슐크림 (3종)",
+      "category": "미백·톤",
+      "price": 5000,
+      "release_date": null,
+      "key_ingredients": [
+        {
+          "name": "글루타치온",
+          "concentration": null,
+          "concentration_listed": false,
+          "dalton_note": "환원형 약 307, 산화형 약 612 → 형태에 따라 500달톤 기준 안·밖이 갈림",
+          "paper": "Watanabe 2014: 산화형 글루타치온 2% 로션, 30~50세 여성 30명, 하루 2번 10주 — 멜라닌 지수가 대조군보다 유의하게 낮아짐"
+        },
+        {
+          "name": "PDRN",
+          "concentration": null,
+          "concentration_listed": false,
+          "dalton_note": "DNA 조각이라 분자가 큼, 분자량 미공개",
+          "paper": "바르는 PDRN의 사람 대상 근거는 아직 약함"
+        }
+      ],
+      "verdict": "보습 목적이면 가성비 OK / 톤 효과 목적이면 글루타치온 형태·농도를 전성분에서 먼저 확인",
+      "source_url": "https://www.esquirekorea.co.kr/article/1912494"
+    },
+    {
+      "id": "2026w45-102",
+      "store": "다이소",
+      "brand": "앰플엔",
+      "name": "멀티 히알루론샷 앰플",
+      "category": "보습",
+      "price": 5000,
+      "release_date": null,
+      "key_ingredients": [
+        {
+          "name": "히알루론산",
+          "concentration": null,
+          "concentration_listed": false,
+          "dalton_note": "보통 수만~수백만 달톤 → 500달톤보다 훨씬 큼, 주로 표면 보습",
+          "paper": "Pavicic 2011: 히알루론산 0.1% 크림, 여성 76명, 60일 — 보습·탄력은 모든 분자량에서 개선, 주름 깊이는 50·130kDa(저분자)만 유의하게 개선"
+        }
+      ],
+      "verdict": "보습 목적이면 가성비 OK / 주름 목적이면 저분자 여부·농도 표기 확인",
+      "source_url": "https://www.esquirekorea.co.kr/article/1912494"
+    },
+    {
+      "id": "2026w45-103",
+      "store": "다이소",
+      "brand": "VT",
+      "name": "피디알엔 광채 립세럼 글레이즈",
+      "category": "립",
+      "price": 3000,
+      "release_date": null,
+      "key_ingredients": [
+        {
+          "name": "PDRN",
+          "concentration": null,
+          "concentration_listed": false,
+          "dalton_note": "DNA 조각이라 분자가 큼, 분자량 미공개",
+          "paper": "바르는 PDRN의 사람 대상 근거는 아직 약함"
+        }
+      ],
+      "verdict": "립 보습·광택용으로는 가격 부담 적음 / PDRN 효과는 근거 약함",
+      "source_url": "https://www.esquirekorea.co.kr/article/1912494"
+    },
+    {
+      "id": "2026w45-104",
+      "store": "다이소",
+      "brand": "더랩바이블랑두",
+      "name": "클리어히알속광 부스팅로션",
+      "category": "보습",
+      "price": 5000,
+      "release_date": null,
+      "key_ingredients": [],
+      "verdict": "기사에 성분 정보 없음 → 전성분 확인 전 판단 보류",
+      "source_url": "https://www.esquirekorea.co.kr/article/1912494"
+    },
+    {
+      "id": "2026w45-105",
+      "store": "다이소",
+      "brand": "다나한",
+      "name": "본연고 홍삼초 아이크림",
+      "category": "보습",
+      "price": 3000,
+      "release_date": null,
+      "key_ingredients": [
+        {
+          "name": "홍삼 추출물",
+          "concentration": null,
+          "concentration_listed": false,
+          "dalton_note": "여러 성분이 섞인 추출물이라 하나의 분자량으로 말할 수 없음",
+          "paper": "확인한 사람 대상 논문 없음"
+        }
+      ],
+      "verdict": "눈가 보습용 저가 제품 / 홍삼 효과는 근거 확인 못 함",
+      "source_url": "https://www.esquirekorea.co.kr/article/1912494"
+    }
+  ]
+}
