@@ -1,11 +1,11 @@
 {
-  "manifestVersion": "2026.11.17",
+  "manifestVersion": "2026.11.17-2",
   "stages": [
     {
       "id": "00-setup",
       "title": "0단계 · 딸깍 자동",
       "desc": "한마디 하면 계획·만들기·돌려보기·확인까지 알아서. 모든 단계의 바닥 스킬.",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "requires": null,
       "zipUrl": "https://7468rrfy7y-wq.github.io/ddalggak/skills/ddalggak-auto.zip",
       "guide": [
@@ -18,7 +18,7 @@
       "id": "01-blog-one",
       "title": "1단계 · 블로그 1개",
       "desc": "좋아하는 주제 하나를 과학으로 푸는 글. 숫자는 원문 링크 확인 후 발행.",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "requires": "00-setup",
       "zipUrl": "https://7468rrfy7y-wq.github.io/ddalggak/skills/ddalggak-blog-one.zip",
       "guide": [
@@ -71,6 +71,124 @@
       "requires": "05-two-accounts",
       "zipUrl": null,
       "guide": []
+    }
+  ],
+  "kits": [
+    {
+      "id": "vibe",
+      "title": "한글 바이브 코딩 딸깍",
+      "skills": [
+        {
+          "name": "ddalggak-auto",
+          "title": "딸깍 자동",
+          "version": "0.2.0",
+          "desc": "사용자가 한마디로 만들고 싶은 것을 말하면(앱, 페이지, 글, 자료, 자동화 등) 계획 한 줄을 보여준 뒤 만들기·돌려보기·스스로 확인까지 끝내고 \"완료\"로 보고한다. \"딸깍\", \"알아서 해줘\", \"만들어줘\"라고 할 때 사용.",
+          "zipUrl": "https://7468rrfy7y-wq.github.io/ddalggak/skills/ddalggak-auto.zip"
+        },
+        {
+          "name": "ddalggak-plan",
+          "title": "딸깍 계획",
+          "version": "0.2.0",
+          "desc": "새 기능이나 앱을 만들기 전에 무엇을 왜 원하는지 먼저 묻고 한 장짜리 계획을 승인받는 규칙. \"만들어줘\", \"추가해줘\" 같은 요청을 받았을 때 코드를 쓰기 전에 사용.",
+          "zipUrl": "https://7468rrfy7y-wq.github.io/ddalggak/skills/ddalggak-plan.zip"
+        },
+        {
+          "name": "ddalggak-test-first",
+          "title": "딸깍 테스트 먼저",
+          "version": "0.2.0",
+          "desc": "계산·해석·저장처럼 틀리면 안 되는 코드를 만들거나 고칠 때 확인 방법(테스트)을 먼저 만들고 코드를 쓰는 규칙. 돈·날짜 계산, 화면 읽기 해석기, 저장 형식 변경 작업에 사용.",
+          "zipUrl": "https://7468rrfy7y-wq.github.io/ddalggak/skills/ddalggak-test-first.zip"
+        },
+        {
+          "name": "ddalggak-root-cause",
+          "title": "딸깍 원인 찾기",
+          "version": "0.2.0",
+          "desc": "오류나 이상한 동작을 고칠 때 증상만 덮지 않고 진짜 원인을 찾는 4단계 규칙. \"안 돼\", \"오류 나\", \"숫자가 이상해\" 같은 말을 들었을 때 코드를 고치기 전에 사용.",
+          "zipUrl": "https://7468rrfy7y-wq.github.io/ddalggak/skills/ddalggak-root-cause.zip"
+        },
+        {
+          "name": "ddalggak-verify",
+          "title": "딸깍 완성 확인",
+          "version": "0.2.0",
+          "desc": "바이브 코딩으로 앱·코드를 만들거나 고칠 때 쓰는 점검 규칙. 가짜 완성, 확인 안 한 '됐다' 보고, 약관 위반, 버전·광고 실수를 막는다. 코드 수정·빌드·연동 작업 전후에 반드시 읽기.",
+          "zipUrl": "https://7468rrfy7y-wq.github.io/ddalggak/skills/ddalggak-verify.zip"
+        },
+        {
+          "name": "ddalggak-launch-check",
+          "title": "딸깍 출시 점검",
+          "version": "0.2.0",
+          "desc": "앱·소프트웨어를 완성했거나 출시하기 전에 한 세션을 공격 2명과 보완 1명으로 쪼개 약점을 물고 뜯어 찾아내고, 재현으로 확인한 것만 고치는 규칙. \"약점 찾아줘\", \"공격해봐\", \"물고 뜯어봐\", \"출시 전 점검\"이라고 할 때 사용.",
+          "zipUrl": "https://7468rrfy7y-wq.github.io/ddalggak/skills/ddalggak-launch-check.zip"
+        },
+        {
+          "name": "ddalggak-tune",
+          "title": "딸깍 흐름 다듬기",
+          "version": "0.2.0",
+          "desc": "바이브 코딩 작업 흐름의 막히는 곳(병목)을 찾아 고치고 교차 점검하는 규칙. 기존 코드를 덮어쓰지 않고 새로 만들어 비교한 뒤 교체하며, 토큰·세션을 아끼는 구조로 정리한다. 작업이 느리거나 반복될 때, 구조 정리를 요청받았을 때 사용.",
+          "zipUrl": "https://7468rrfy7y-wq.github.io/ddalggak/skills/ddalggak-tune.zip"
+        }
+      ]
+    },
+    {
+      "id": "blog",
+      "title": "블로그 딸깍",
+      "skills": [
+        {
+          "name": "ddalggak-blog-one",
+          "title": "딸깍 블로그 글 쓰기",
+          "version": "0.2.0",
+          "desc": "좋아하는 주제 하나를 과학으로 풀어 블로그 글 한 편을 쓴다. 숫자는 원문 링크로 확인하고, 제휴 링크가 있으면 대가성 문구를 넣고, 임시저장용 완성본까지 만든다. \"블로그 글 써줘\", \"딸깍 블로그\"라고 할 때 사용.",
+          "zipUrl": "https://7468rrfy7y-wq.github.io/ddalggak/skills/ddalggak-blog-one.zip"
+        },
+        {
+          "name": "ddalggak-naver-blog",
+          "title": "딸깍 네이버 블로그",
+          "version": "0.2.0",
+          "desc": "완성된 글을 네이버 블로그 스마트에디터에 맞게 바꿔 넣고, 사진 자리·태그·카테고리를 채운 뒤 임시저장 또는 예약발행 직전까지 준비한다. \"네이버에 올려줘\", \"네이버 예약\"이라고 할 때 사용.",
+          "zipUrl": "https://7468rrfy7y-wq.github.io/ddalggak/skills/ddalggak-naver-blog.zip"
+        },
+        {
+          "name": "ddalggak-tistory",
+          "title": "딸깍 티스토리",
+          "version": "0.2.0",
+          "desc": "완성된 글을 티스토리 HTML 모드에 맞게 만들어 넣고, 카테고리·태그·대표 이미지·공개 설정을 채운 뒤 임시저장 또는 예약발행 직전까지 준비한다. \"티스토리에 올려줘\", \"티스토리 예약\"이라고 할 때 사용.",
+          "zipUrl": "https://7468rrfy7y-wq.github.io/ddalggak/skills/ddalggak-tistory.zip"
+        },
+        {
+          "name": "ddalggak-search-register",
+          "title": "딸깍 검색 등록",
+          "version": "0.2.0",
+          "desc": "새 블로그(티스토리 등)를 네이버 서치어드바이저, 구글 서치콘솔, 빙 웹마스터에 등록하고 사이트맵·RSS를 제출한다. \"검색 등록\", \"서치어드바이저\", \"RSS 등록\", \"사이트맵\"이라고 할 때 사용.",
+          "zipUrl": "https://7468rrfy7y-wq.github.io/ddalggak/skills/ddalggak-search-register.zip"
+        }
+      ]
+    },
+    {
+      "id": "ops",
+      "title": "운영 딸깍",
+      "skills": [
+        {
+          "name": "ddalggak-save-backup",
+          "title": "딸깍 저장·백업",
+          "version": "0.2.0",
+          "desc": "파일을 저장·복사·백업·옮길 때 같은 이름 덮어쓰기를 막고, 날짜_시간 이름으로 버전을 쌓는다. 저장, 백업, 정리, 옮기기 작업에 사용.",
+          "zipUrl": "https://7468rrfy7y-wq.github.io/ddalggak/skills/ddalggak-save-backup.zip"
+        },
+        {
+          "name": "ddalggak-handoff",
+          "title": "딸깍 인계 메모",
+          "version": "0.2.0",
+          "desc": "대화가 길어지거나 사용량 한도가 차서 다른 계정·새 대화로 넘어갈 때, 그대로 붙여넣으면 바로 이어지는 인계 메모를 만든다. \"넘겨줘\", \"인계\", \"이어서 하게\"라고 할 때 사용.",
+          "zipUrl": "https://7468rrfy7y-wq.github.io/ddalggak/skills/ddalggak-handoff.zip"
+        },
+        {
+          "name": "ddalggak-relay",
+          "title": "딸깍 다른 AI 지시서",
+          "version": "0.2.0",
+          "desc": "반복·대량·초벌 작업을 다른 AI(무료 등급)에 넘길 수 있게 짧은 복사용 지시서를 만들고, 돌아온 결과를 검수하는 규칙. 토큰을 아끼고 싶을 때, 두 번째 의견이 필요할 때, \"다른 AI한테 시킬 것 만들어줘\"라고 할 때 사용.",
+          "zipUrl": "https://7468rrfy7y-wq.github.io/ddalggak/skills/ddalggak-relay.zip"
+        }
+      ]
     }
   ]
 }

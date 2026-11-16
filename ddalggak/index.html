@@ -28,6 +28,13 @@ h2{font-size:15px;color:var(--muted);font-weight:600;margin:30px 0 10px}
 .steps li:before{content:counter(s);position:absolute;left:0;top:11px;width:26px;height:26px;border-radius:50%;background:var(--line);text-align:center;line-height:26px;font-size:13px;font-weight:700}
 .note{font-size:13px;color:var(--muted)}
 .soon{opacity:.45}
+.kit h2{color:var(--text);font-size:19px;margin-top:34px}
+.kit .count{color:var(--muted);font-size:13px;font-weight:400;margin-left:6px}
+.row{display:flex;align-items:center;gap:12px;background:var(--card);border-radius:14px;padding:14px 14px 14px 16px;margin-bottom:8px}
+.row .t{flex:1;min-width:0}
+.row b{display:block;font-size:16px}
+.row span{display:block;color:var(--muted);font-size:13px;line-height:1.45;margin-top:2px}
+.row a{flex:none;background:var(--accent);color:#fff;text-decoration:none;font-weight:700;font-size:14px;padding:10px 14px;border-radius:10px}
 footer{margin-top:40px;font-size:12px;color:var(--muted)}
 </style>
 </head>
@@ -35,15 +42,14 @@ footer{margin-top:40px;font-size:12px;color:var(--muted)}
 <main>
   <div class="logo">딸깍 · 쇼미더돈공부</div>
   <span class="free">전부 무료</span>
-  <h1>한마디 하면<br>끝까지 알아서.</h1>
+  <h1>한글로 말하면<br>끝까지 알아서.</h1>
   <p class="lead">쇼미더돈공부 글 보고 오셨죠? 그 글을 만든 클로드 스킬입니다. 받아서 클로드에 올리면 바로 씁니다.</p>
 
-  <h2>받을 스킬</h2>
-  <div id="list"></div>
+  <div id="kits"></div>
 
   <h2>설치는 세 번 딸깍</h2>
   <ol class="steps">
-    <li>위에서 스킬 받기 (zip 파일)</li>
+    <li>위에서 필요한 스킬 받기 (zip 파일, 하나씩)</li>
     <li><b>claude.ai</b> → 커스터마이즈 → 스킬 → 올리기 → 받은 zip 선택</li>
     <li>클로드에게 한마디: <b>"딸깍, ○○ 만들어줘"</b></li>
   </ol>
@@ -60,20 +66,23 @@ footer{margin-top:40px;font-size:12px;color:var(--muted)}
 <script>
 fetch('skills.json?t='+Date.now()).then(r=>r.json()).then(m=>{
   document.getElementById('ver').textContent='스킬 목록 '+m.manifestVersion;
-  const el=document.getElementById('list');
-  m.stages.forEach(st=>{
-    const d=document.createElement('div');
-    d.className='card'+(st.zipUrl?'':' soon');
-    const say=(st.guide||[]).find(g=>g.includes('클로드에게'));
-    d.innerHTML='<h3></h3><p></p>'+(say?'<div class="say"></div>':'')+
-      (st.zipUrl?'<a class="btn" download></a>':'<span class="note">준비 중</span>');
-    d.querySelector('h3').textContent=st.title;
-    d.querySelector('p').textContent=st.desc;
-    if(say) d.querySelector('.say').textContent=say.replace('클로드에게: ','💬 ');
-    if(st.zipUrl){const a=d.querySelector('a');a.href=st.zipUrl;a.textContent='받기 · v'+st.version;}
-    el.appendChild(d);
+  const box=document.getElementById('kits');
+  (m.kits||[]).forEach(k=>{
+    const sec=document.createElement('section'); sec.className='kit';
+    const h=document.createElement('h2'); h.textContent=k.title;
+    const c=document.createElement('span'); c.className='count'; c.textContent=k.skills.length+'개'; h.appendChild(c);
+    sec.appendChild(h);
+    k.skills.forEach(sk=>{
+      const r=document.createElement('div'); r.className='row';
+      r.innerHTML='<div class="t"><b></b><span></span></div><a download>받기</a>';
+      r.querySelector('b').textContent=sk.title+' · v'+sk.version;
+      r.querySelector('span').textContent=sk.desc.length>70?sk.desc.slice(0,70)+'…':sk.desc;
+      r.querySelector('a').href=sk.zipUrl;
+      sec.appendChild(r);
+    });
+    box.appendChild(sec);
   });
-}).catch(()=>{document.getElementById('list').innerHTML='<p class="note">목록을 불러오지 못했어요. 새로고침 해주세요.</p>'});
+}).catch(()=>{document.getElementById('kits').innerHTML='<p class="note">목록을 불러오지 못했어요. 새로고침 해주세요.</p>'});
 </script>
 </body>
 </html>
