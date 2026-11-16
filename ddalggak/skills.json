@@ -1,0 +1,76 @@
+{
+  "manifestVersion": "2026.11.17",
+  "stages": [
+    {
+      "id": "00-setup",
+      "title": "0단계 · 딸깍 자동",
+      "desc": "한마디 하면 계획·만들기·돌려보기·확인까지 알아서. 모든 단계의 바닥 스킬.",
+      "version": "0.1.0",
+      "requires": null,
+      "zipUrl": "https://7468rrfy7y-wq.github.io/ddalggak/skills/ddalggak-auto.zip",
+      "guide": [
+        "claude.ai 설정 → 기능 → 코드 실행 켜기",
+        "광고 보고 받기 → 클로드에 설치하러 가기 → 올리기",
+        "클로드에게: \"딸깍, ○○ 만들어줘\""
+      ]
+    },
+    {
+      "id": "01-blog-one",
+      "title": "1단계 · 블로그 1개",
+      "desc": "좋아하는 주제 하나를 과학으로 푸는 글. 숫자는 원문 링크 확인 후 발행.",
+      "version": "0.1.0",
+      "requires": "00-setup",
+      "zipUrl": "https://7468rrfy7y-wq.github.io/ddalggak/skills/ddalggak-blog-one.zip",
+      "guide": [
+        "광고 보고 받기",
+        "클로드에 설치하러 가기 → 올리기",
+        "클로드에게: \"딸깍 블로그, 주제는 ○○\""
+      ]
+    },
+    {
+      "id": "02-link",
+      "title": "2단계 · 링크 붙이기",
+      "desc": "성과형 링크와 대가성 문구 두 번.",
+      "version": "0.1.0",
+      "requires": "01-blog-one",
+      "zipUrl": null,
+      "guide": []
+    },
+    {
+      "id": "03-threads",
+      "title": "3단계 · 쓰레드 요약글",
+      "desc": "블로그 글을 쓰레드 요약으로, 링크는 댓글에.",
+      "version": "0.1.0",
+      "requires": "02-link",
+      "zipUrl": null,
+      "guide": []
+    },
+    {
+      "id": "04-blog-multi",
+      "title": "4단계 · 블로그 N개",
+      "desc": "블로그마다 주제가 달라야 넘어감.",
+      "version": "0.1.0",
+      "requires": "03-threads",
+      "zipUrl": null,
+      "guide": []
+    },
+    {
+      "id": "05-two-accounts",
+      "title": "5단계 · 두 계정 운영",
+      "desc": "계정 역할 나누기, 한도 차면 인계 메모로 넘기기.",
+      "version": "0.1.0",
+      "requires": "04-blog-multi",
+      "zipUrl": null,
+      "guide": []
+    },
+    {
+      "id": "06-nocoding",
+      "title": "6단계 · 노코딩 (앱)",
+      "desc": "계획 → 테스트 → 점검 → 출시 전 공격 점검.",
+      "version": "0.1.0",
+      "requires": "05-two-accounts",
+      "zipUrl": null,
+      "guide": []
+    }
+  ]
+}
