@@ -138,7 +138,7 @@ footer{text-align:center;color:var(--muted);font-size:12px;margin-top:20px;line-
 </main>
 <script>
 // ready: 구글 그룹·비공개 테스트 연결이 끝난 앱만 true
-var READY = {};
+var READY = {"com.liacompany.beautynew":true,"com.liacompany.ddalggak":true,"com.liacompany.supplecheck":true,"com.liacompany.subsradar":true,"com.liacompany.mixalert":true};
 document.querySelectorAll('.card').forEach(function(c){
   var g=c.dataset.group, p=c.dataset.pkg, on=!!READY[p];
   var a=c.querySelector('.g'), t=c.querySelector('.t'), d=c.querySelector('.d');
