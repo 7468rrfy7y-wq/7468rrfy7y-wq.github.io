@@ -1,0 +1,42 @@
+[
+ {
+  "name": "신상 성분 알림",
+  "pkg": "com.liacompany.beautynew",
+  "group": "liacompany-beauty-test",
+  "type": "closed",
+  "dev": "LIA",
+  "request": "미흡한 점 피드백 주시면 바로 반영하겠습니다"
+ },
+ {
+  "name": "딸깍",
+  "pkg": "com.liacompany.ddalggak",
+  "group": "liacompany-ddalggak-test",
+  "type": "closed",
+  "dev": "LIA",
+  "request": "미흡한 점 피드백 주시면 바로 반영하겠습니다"
+ },
+ {
+  "name": "영양제 궁합 판독기",
+  "pkg": "com.liacompany.supplecheck",
+  "group": "liacompany-supple-test",
+  "type": "closed",
+  "dev": "LIA",
+  "request": "미흡한 점 피드백 주시면 바로 반영하겠습니다"
+ },
+ {
+  "name": "구독 해지 레이더",
+  "pkg": "com.liacompany.subsradar",
+  "group": "liacompany-subs-test",
+  "type": "closed",
+  "dev": "LIA",
+  "request": "미흡한 점 피드백 주시면 바로 반영하겠습니다"
+ },
+ {
+  "name": "세제 섞으면 위험할까",
+  "pkg": "com.liacompany.mixalert",
+  "group": "liacompany-mix-test",
+  "type": "closed",
+  "dev": "LIA",
+  "request": "미흡한 점 피드백 주시면 바로 반영하겠습니다"
+ }
+]
