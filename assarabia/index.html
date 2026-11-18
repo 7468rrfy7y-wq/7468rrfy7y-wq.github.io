@@ -224,9 +224,9 @@ const HW=5.5,HD=4.5,DOOR=[3.35,4.45],FRONT=4.45;
 let scene,camera,renderer,raycaster,pointer,clock;
 let skyMat,stars,moonLight,hemi,amb;
 const lampMats=[],lampGlows=[],walls=[],clickables=[],floorHits=[],OBST=[],marquee=[];
-const agents=[],npcs=[],particles=[],tables=[],stools=[];
+const agents=[],npcs=[],particles=[],tables=[],stools=[],neighbors=[];
 let player,mugHand,master,moveMarker,tapGlass,airSign,signTex;
-let camAngle=0.15,camTilt=0.1,camDist=11.5,camGoal=null,camTarget;
+let camAngle=0.25,camTilt=0.62,camDist=13.5,camGoal=null,camTarget;
 let dragging=false,dragMoved=false,lastX=0,lastY=0,downX=0,downY=0,downT=0,pinchD=0;
 let react=null,reactT=0,planToken=0,entered=false,cheersT=0,beers=0;
 let myName='손님',myColor=OUTFITS[0];
@@ -244,7 +244,7 @@ function init(){
  document.getElementById('app').appendChild(renderer.domElement);
  camera=new THREE.PerspectiveCamera(40,innerWidth/innerHeight,0.1,300);
  raycaster=new THREE.Raycaster();pointer=new THREE.Vector2();
- glowTex=glowTexture();tmpV=new THREE.Vector3();camLook=new THREE.Vector3(0,1.2,4.5);
+ glowTex=glowTexture();tmpV=new THREE.Vector3();camLook=new THREE.Vector3(0,1,1.2);
 
  hemi=new THREE.HemisphereLight(0x5a6aa8,0x2a1f1a,0.55);scene.add(hemi);
  amb=new THREE.AmbientLight(0xffd9a0,0.28);scene.add(amb);
@@ -301,7 +301,7 @@ function buildStreet(){
   for(let fy=1.4;fy<h-0.6;fy+=1.5)for(let fx=-w/2+0.8;fx<w/2-0.5;fx+=1.3){if(Math.random()<lit){const wm=new THREE.Mesh(new THREE.PlaneGeometry(0.8,0.7),new THREE.MeshBasicMaterial({color:pick([0xffd9a0,0xfff0d0,0xa8c8ff])}));wm.position.set(x+fx,fy,z+(z>10?-d/2-0.01:d/2+0.01));if(z>10)wm.rotation.y=Math.PI;scene.add(wm);}}};
  bld(-12,19,9,9,4,0x2e3040,0.35);bld(-2,20,8,13,5,0x343448,0.3);bld(7,19,7,7,4,0x3a3140,0.4);bld(16,20,10,11,5,0x2a2e3e,0.3);bld(-22,19,8,6,4,0x323042,0.4);
  // 옆 가게들 (밤엔 불 꺼진 학원·꽃집·커피숍)
- const shop=(x,w,name,col)=>{const g=new THREE.Group();g.position.set(x,0,0);scene.add(g);
+ const shop=(x,w,name,col)=>{const g=new THREE.Group();g.position.set(x,0,0);scene.add(g);neighbors.push(g);
   mesh(new THREE.BoxGeometry(w,4.4,9),M(col,0.9),0,2.1,0,g);
   const t=ctex(256,64,(c,W,H)=>{c.fillStyle='#22232a';c.fillRect(0,0,W,H);c.fillStyle='#55565e';c.font='34px '+FONT;c.textAlign='center';c.textBaseline='middle';c.fillText(name,W/2,H/2+2);});
   const s=new THREE.Mesh(new THREE.PlaneGeometry(w*0.8,0.7),new THREE.MeshBasicMaterial({map:t}));s.position.set(0,3.6,4.52);g.add(s);
@@ -488,7 +488,7 @@ function buildFurniture(){
 /* ---------------- 사람들 ---------------- */
 let masterObj;
 function buildPeople(){
- player=mkAgent(makeFigure({robe:myColor,top:0xf6efe4,hair:0x2a2018,skin:0xf2c9a0,style:'p',ribbon:0x3b3029}),rnd(3.2,4.6),rnd(6.2,7.2),3.0);
+ player=mkAgent(makeFigure({robe:myColor,top:0xf6efe4,hair:0x2a2018,skin:0xf2c9a0,style:'p',ribbon:0x3b3029}),rnd(-0.4,0.6),rnd(0.4,1.2),3.0);
  addTag(player.f,myName,0,1.98,false);addBubble(player.f,2.5);player.f.rotation.y=Math.PI;
  mugHand=makeMug();mugHand.position.set(0.12,0.95,0.32);mugHand.visible=false;player.f.userData.rig.add(mugHand);
  // 맥주 마스터 사장님
@@ -654,8 +654,8 @@ function bindUI(){
   $('who').textContent=myName;player.f.remove(player.f.userData.tag);addTag(player.f,myName,0,1.98,false);
   audioStart();$('enter').classList.add('hide');setTimeout(()=>$('enter').remove(),800);
   $('hud').classList.add('on');$('bar').classList.add('on');entered=true;netStart();
-  setTimeout(()=>{camGoal={a:0.25,t:0.62,d:innerWidth<innerHeight?16:13.5,slow:true};},1800);
-  setTimeout(()=>{goto(3.9,2.6,()=>{say(masterObj.f,'어서오세요~ 앗싸라비아입니다 🍺',3);});},1200);
+  camGoal={a:0.25,t:0.62,d:innerWidth<innerHeight?16:13.5};
+  setTimeout(()=>say(masterObj.f,'어서오세요~ 앗싸라비아입니다 🍺',3),900);
   setTimeout(()=>toast('🍺 생맥주 버튼 → 맥주 마스터가 직접 따라줘요'),3000);
   setTimeout(()=>toast('👆 테이블을 콕 → 앉기 · 🍢 안주 주문 · 🍻 짠'),6800);
  };
@@ -723,8 +723,8 @@ function animate(){
  camera.position.set(camLook.x+Math.sin(camAngle)*Math.cos(camTilt)*camDist,Math.max(0.6,camLook.y+Math.sin(camTilt)*camDist),camLook.z+Math.cos(camAngle)*Math.cos(camTilt)*camDist);
  camera.lookAt(camLook);sky.position.copy(camera.position);stars.position.copy(camera.position);
  // 위에서 보면 카메라 쪽 벽이 투명 (낮게 보면 거리 뷰)
- walls.forEach(w=>{tmpV.copy(camera.position).sub(w.c);const out=tmpV.dot(w.n)>0.3&&camTilt>0.3;const tgt=out?0.07:1;w.a+=(tgt-w.a)*(1-Math.exp(-dt*7));
-  w.mats.forEach(m=>{m.opacity=w.a;m.depthWrite=w.a>0.6;});w.g.traverse(o=>{if(o.isMesh)o.castShadow=w.a>0.6;});});
+ const pin=inside(player.f.position.z);neighbors.forEach(g=>g.visible=!pin);walls.forEach(w=>{tmpV.copy(camera.position).sub(w.c);const facing=tmpV.dot(w.n)>0.3;const out=pin?(w.n.z<0?facing:true):(facing&&camTilt>0.3);const tgt=out?0.0:1;w.a+=(tgt-w.a)*(1-Math.exp(-dt*7));
+  w.mats.forEach(m=>{m.opacity=w.a;m.depthWrite=w.a>0.6;});w.g.visible=w.a>0.02;w.g.traverse(o=>{if(o.isMesh)o.castShadow=w.a>0.6;});});
  renderer.render(scene,camera);
 }
 function onResize(){camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);}
