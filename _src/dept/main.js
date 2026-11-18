@@ -8,9 +8,9 @@ const HALLS=[
  {id:'coupang',name:'쿠팡관',file:'쿠팡',emoji:'🚀',color:0xb3122a,glow:0xff4a5a,ang:Math.PI,sub:'ROCKET LUXURY',
   disc:'이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.',btn:'쿠팡에서 보기',css:'linear-gradient(135deg,#7a0c1d,#c8102e)'},
  {id:'ali',name:'알리관',file:'알리',emoji:'✈️',color:0xc2410c,glow:0xff8a3a,ang:Math.PI*0.68,sub:'GLOBAL SELECT',
-  disc:'알리익스프레스 제휴(어필리에이트) 활동으로 구매 시 일정액의 수수료를 제공받습니다.',btn:'알리에서 보기',css:'linear-gradient(135deg,#8a2c06,#e8590c)'},
+  disc:'알리익스프레스 링크는 애드픽 제휴 광고 링크이며, 링크를 통해 구매하면 일정액의 수수료를 받을 수 있습니다.',btn:'알리에서 보기',css:'linear-gradient(135deg,#8a2c06,#e8590c)'},
  {id:'naver',name:'네이버관',file:'네이버',emoji:'🛍️',color:0x067a3a,glow:0x3ae08a,ang:-Math.PI*0.68,sub:'GREEN EDITION',
-  disc:'네이버 쇼핑 커넥트 활동의 일환으로 판매 발생 시 일정액의 수수료를 제공받습니다.',btn:'네이버에서 보기',css:'linear-gradient(135deg,#04512a,#03a454)'},
+  disc:'네이버관 상품은 리아과학 블로그 글로 연결됩니다. 그 글의 네이버 쇼핑 커넥트 링크로 구매하면 판매 수수료를 받을 수 있습니다.',btn:'네이버에서 보기',css:'linear-gradient(135deg,#04512a,#03a454)'},
 ];
 const CONCIERGE_LINES=['어서 오세요, 온라인 백화점입니다','주문은 아래 주문서에서 하시면 됩니다','오늘의 세일은 주문서 맨 위에 있어요','천천히 둘러보세요 ✨'];
 const GUEST_LINES=['여기 분위기 미쳤다','쿠팡관 진짜 명품관 같네','세일부터 보자','알리관 조명 예쁘다','네이버관 초록색 고급지다','백화점 주인이 수수료 받는대 ㅋㅋ','사진 찍고 가자 📸'];
@@ -55,7 +55,7 @@ function init(){
  el.addEventListener('touchend',()=>pinchD=0);
  window.addEventListener('resize',onResize);
  HALLS.forEach(loadOrders);
- bindUI();animate();
+ bindUI();animate();window.__R=renderer;window.__S=scene;
 }
 // 금·대리석 반사용 환경맵
 function buildEnv(){
@@ -255,15 +255,15 @@ function renderOrders(h){const box=document.getElementById('oList');box.textCont
  if(rows===null){const p=document.createElement('div');p.className='oEmpty';p.textContent='주문서 불러오는 중…';box.appendChild(p);return;}
  if(!rows.length){const p=document.createElement('div');p.className='oEmpty';p.textContent='아직 진열된 상품이 없어요. 곧 채워집니다 ✨';box.appendChild(p);return;}
  const cats=[];rows.forEach(r=>{if(!cats.includes(r.cat))cats.push(r.cat);});
- cats.sort((a,b)=>(/세일/.test(b)?1:0)-(/세일/.test(a)?1:0));
- cats.forEach(c=>{const hd=document.createElement('div');hd.className='oCat'+(/세일/.test(c)?' sale':'');hd.textContent=(/세일/.test(c)?'🔥 ':'')+c;box.appendChild(hd);
+ const rk=c=>/바로/.test(c)?2:/세일/.test(c)?1:0;cats.sort((a,b)=>rk(b)-rk(a));
+ cats.forEach(c=>{const hd=document.createElement('div');hd.className='oCat'+(/세일/.test(c)?' sale':'');hd.textContent=(/바로/.test(c)?'🚪 ':/세일/.test(c)?'🔥 ':'')+c;box.appendChild(hd);
   rows.filter(r=>r.cat===c).forEach(r=>{const it=document.createElement('div');it.className='oItem';
    const tx=document.createElement('div');tx.className='oTx';const n=document.createElement('b');n.textContent=r.name;tx.appendChild(n);
    if(r.price){const p=document.createElement('span');p.className='oPrice';p.textContent=r.price;tx.appendChild(p);}
    if(r.desc){const d=document.createElement('small');d.textContent=r.desc;tx.appendChild(d);}
    it.appendChild(tx);
    const b=document.createElement('button');
-   if(r.link){b.textContent=h.btn+' ↗';b.onclick=()=>{sfx('pop');window.open(r.link,'_blank','noopener,noreferrer');};}
+   if(r.link){b.textContent=(/blog\.naver\.com|tistory\.com/.test(r.link)?'📖 글 보고 사기':/바로/.test(r.cat)?'🚪 바로 들어가기':h.btn)+' ↗';b.onclick=()=>{sfx('pop');window.open(r.link,'_blank','noopener,noreferrer');};}
    else{b.textContent='링크 준비 중';b.disabled=true;}
    it.appendChild(b);box.appendChild(it);});});}
 function closeHall(){document.getElementById('orderPanel').classList.remove('open');curHall=null;}
