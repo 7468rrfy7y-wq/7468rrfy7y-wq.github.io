@@ -612,7 +612,7 @@ function handleClick(e){
  pointer.x=(e.clientX/innerWidth)*2-1;pointer.y=-(e.clientY/innerHeight)*2+1;raycaster.setFromCamera(pointer,camera);
  const hit=raycaster.intersectObjects(clickables,false),fh=raycaster.intersectObjects(floorHits,false);
  if(hit.length&&(!fh.length||hit[0].distance<fh[0].distance+0.6)){const a=hit[0].object.userData.act;
-  if(a.type==='table')return goTable(a.ti);if(a.type==='beer')return goBeer();if(a.type==='map')return openMap();}
+  if(a.type==='table')return goTable(a.ti);if(a.type==='beer')return goBeer();if(a.type==='map')return;}
  if(fh.length){const p=fh[0].point;const ins=p.z<FRONT;let x=p.x,z=p.z;
   if(ins){x=clamp(x,-5.1,5.1);z=clamp(z,-3.2,3.7);}else{x=clamp(x,-16,16);z=clamp(z,4.95,11.8);}goto(x,z);}}
 function openMap(){toast('📍 네이버 지도에서 앗싸라비아 위치를 열어요');setTimeout(()=>window.open(NAVER_MAP,'_blank','noopener'),400);}
