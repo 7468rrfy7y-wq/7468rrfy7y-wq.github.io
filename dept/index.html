@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>🏬 온라인 백화점 · 명품관</title>
-<meta name="description" content="쿠팡관·알리관·네이버관이 입점한 3D 온라인 백화점. 구매하시면 백화점 주인인 제가 수수료를 받습니다.">
-<meta property="og:title" content="🏬 온라인 백화점 — 쿠팡·알리·네이버 입점">
+<title>🏬 EMPIRE 쇼핑몰 · 명품관</title>
+<meta name="description" content="쿠팡관·알리관·네이버관이 입점한 3D 쇼핑몰. 구매하시면 쇼핑몰 주인인 제가 수수료를 받습니다.">
+<meta property="og:title" content="🏬 EMPIRE 쇼핑몰 — 쿠팡·알리·네이버 입점">
 <meta property="og:description" content="너네 아직도 쿠팡한테 일해주냐? 나는 걔네를 내 백화점에 입점시켰다.">
 <meta name="theme-color" content="#07070c">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -182,8 +182,8 @@ html,body{background:#07070c;}
 <div id="app"></div>
 <div id="hud">
   <div id="sign" class="glass">
-    <b>🏬 온라인 백화점</b><small>명품관 · <span id="who">손님</span>님 쇼핑 중</small>
-    <div id="ownerTag">구매하시면 백화점 주인인 제가 수수료를 받습니다 🙇</div>
+    <b>🏬 EMPIRE 쇼핑몰</b><small>명품관 · <span id="who">손님</span>님 쇼핑 중</small>
+    <div id="ownerTag">구매하시면 쇼핑몰 주인인 제가 수수료를 받습니다 🙇</div>
   </div>
   <div id="right">
     <button id="snd" class="glass" title="소리">🔊</button>
@@ -201,15 +201,15 @@ html,body{background:#07070c;}
 <div id="talk" class="glass"></div>
 <div id="orderPanel"><div id="oCard">
   <div id="oHead"><div class="t"><div id="oTitle">주문서</div><div id="oSub"></div></div><button id="oClose">×</button></div>
-  <div id="oNote"><b>구매하시면 백화점 주인인 제가 수수료를 받습니다 🙇</b><span id="oDisc"></span></div>
+  <div id="oNote"><b>구매하시면 쇼핑몰 주인인 제가 수수료를 받습니다 🙇</b><span id="oDisc"></span></div>
   <div id="oList"></div>
 </div></div>
 <div id="enter">
   <div id="ecard">
     <div class="orb">🏬</div>
-    <h1>온라인 백화점</h1>
+    <h1>EMPIRE 쇼핑몰</h1>
     <p class="sub">쿠팡관 · 알리관 · 네이버관 입점</p>
-    <p class="owner">구매하시면 백화점 주인인 제가 수수료를 받습니다 🙇</p>
+    <p class="owner">구매하시면 쇼핑몰 주인인 제가 수수료를 받습니다 🙇</p>
     <label>내 이름</label>
     <input id="nick" maxlength="8" placeholder="손님" autocomplete="off">
     <label>오늘의 옷 색</label>
@@ -219,14 +219,14 @@ html,body{background:#07070c;}
   </div>
 </div>
 <div id="flash"></div>
-<div id="boot"><div class="spin"></div><h1>🏬 온라인 백화점</h1><p>명품관 조명 켜는 중…</p></div>
+<div id="boot"><div class="spin"></div><h1>🏬 EMPIRE 쇼핑몰</h1><p>명품관 조명 켜는 중…</p></div>
 <script>
 /* =========================================================
-   온라인 백화점 · 명품관  v1 (2026-11-19)
+   EMPIRE 쇼핑몰 · 명품관  v1 (2026-11-19)
    쿠팡관 · 알리관 · 네이버관 — 매장은 보는 곳, 주문은 주문서로
    ========================================================= */
 const OUTFITS=[0x1a1a1a,0xf4efe6,0x7a1f2b,0x1f3a5f,0xb08d57,0x3d5a45];
-const OWNER_LINE='구매하시면 백화점 주인인 제가 수수료를 받습니다 🙇';
+const OWNER_LINE='구매하시면 쇼핑몰 주인인 제가 수수료를 받습니다 🙇';
 const HALLS=[
  {id:'coupang',name:'쿠팡관',file:'쿠팡',emoji:'🚀',color:0xb3122a,glow:0xff4a5a,ang:Math.PI,sub:'ROCKET LUXURY',
   disc:'이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.',btn:'쿠팡에서 보기',css:'linear-gradient(135deg,#7a0c1d,#c8102e)'},
@@ -235,8 +235,8 @@ const HALLS=[
  {id:'naver',name:'네이버관',file:'네이버',emoji:'🛍️',color:0x067a3a,glow:0x3ae08a,ang:-Math.PI*0.68,sub:'GREEN EDITION · 입점 대기중',wait:true,
   disc:'네이버관 상품은 리아과학 블로그 글로 연결됩니다. 그 글의 네이버 쇼핑 커넥트 링크로 구매하면 판매 수수료를 받을 수 있습니다.',btn:'네이버에서 보기',css:'linear-gradient(135deg,#04512a,#03a454)'},
 ];
-const CONCIERGE_LINES=['어서 오세요, 온라인 백화점입니다','주문은 아래 주문서에서 하시면 됩니다','오늘의 세일은 주문서 맨 위에 있어요','천천히 둘러보세요 ✨'];
-const GUEST_LINES=['여기 분위기 미쳤다','쿠팡관 진짜 명품관 같네','세일부터 보자','알리관 조명 예쁘다','네이버관 초록색 고급지다','백화점 주인이 수수료 받는대 ㅋㅋ','사진 찍고 가자 📸'];
+const CONCIERGE_LINES=['어서 오세요, EMPIRE 쇼핑몰입니다','주문은 아래 주문서에서 하시면 됩니다','오늘의 세일은 주문서 맨 위에 있어요','천천히 둘러보세요 ✨'];
+const GUEST_LINES=['여기 분위기 미쳤다','쿠팡관 진짜 명품관 같네','세일부터 보자','알리관 조명 예쁘다','네이버관 초록색 고급지다','쇼핑몰 주인이 수수료 받는대 ㅋㅋ','사진 찍고 가자 📸'];
 
 const R_FLOOR=17,R_WALK=10.2,R_HALL=13.2;
 let scene,camera,renderer,raycaster,pointer,clock;
@@ -322,7 +322,7 @@ function buildAtrium(){
  [3.2,3.3,9.0,9.08,R_FLOOR-0.4].forEach(r=>{const ring=new THREE.Mesh(new THREE.RingGeometry(r,r+0.06,128),new THREE.MeshStandardMaterial({color:0xd8b36a,metalness:1,roughness:0.25}));ring.rotation.x=-Math.PI/2;ring.position.y=0.006;scene.add(ring);});
  const inlayT=ctex(1024,1024,(x,w,h)=>{const c=w/2;x.clearRect(0,0,w,h);
   x.strokeStyle='#d8b36a';x.lineWidth=4;for(let i=0;i<16;i++){const a=i/16*Math.PI*2;x.beginPath();x.moveTo(c+Math.cos(a)*150,c+Math.sin(a)*150);x.lineTo(c+Math.cos(a+0.2)*470,c+Math.sin(a+0.2)*470);x.lineTo(c+Math.cos(a)*500,c+Math.sin(a)*500);x.stroke();}
-  x.fillStyle='#d8b36a';x.textAlign='center';x.textBaseline='middle';x.font='120px "Noto Serif KR",serif';x.fillText('온라인 백화점',c,c-20);
+  x.fillStyle='#d8b36a';x.textAlign='center';x.textBaseline='middle';x.font='120px "Noto Serif KR",serif';x.fillText('EMPIRE',c,c-20);
   x.font='38px serif';x.fillText('ONLINE  DEPARTMENT  STORE',c,c+80);});
  const inlay=new THREE.Mesh(new THREE.CircleGeometry(3.15,64),new THREE.MeshStandardMaterial({map:inlayT,transparent:true,metalness:0.6,roughness:0.3,depthWrite:false}));
  inlay.rotation.x=-Math.PI/2;inlay.position.y=0.01;scene.add(inlay);
@@ -406,7 +406,7 @@ function buildLobby(){
   x.fillStyle='#f3efe8';x.font='28px "Noto Sans KR",sans-serif';['추가 입점 문의는','초대기업 이상,','그룹 단위로만 받습니다'].forEach((s,i)=>x.fillText(s,w/2,400+i*46));
   x.fillStyle='#bfa06a';x.font='26px "Noto Sans KR",sans-serif';x.fillText('Lia_ceo@liacompany.kr',w/2,580);
   x.strokeStyle='#5a4a2a';x.lineWidth=2;x.beginPath();x.moveTo(80,650);x.lineTo(w-80,650);x.stroke();
-  x.fillStyle='#f3efe8';x.font='26px "Noto Sans KR",sans-serif';['구매하시면','백화점 주인인 제가','수수료를 받습니다 🙇'].forEach((s,i)=>x.fillText(s,w/2,720+i*42));});
+  x.fillStyle='#f3efe8';x.font='26px "Noto Sans KR",sans-serif';['구매하시면','쇼핑몰 주인인 제가','수수료를 받습니다 🙇'].forEach((s,i)=>x.fillText(s,w/2,720+i*42));});
  const tm=new THREE.MeshStandardMaterial({map:t,emissive:0xffffff,emissiveMap:t,emissiveIntensity:0.45,roughness:0.3});
  const tp=new THREE.Mesh(new THREE.PlaneGeometry(1.56,2.75),tm);tp.position.set(0,1.55,0.125);tot.add(tp);
  mesh(new THREE.BoxGeometry(1.8,0.08,0.34),GOLD(),0,0.04,0,tot);mesh(new THREE.BoxGeometry(1.8,0.08,0.34),GOLD(),0,3.02,0,tot);
@@ -512,7 +512,7 @@ function doReact(type){react=type;reactT=0;netEvent(type);const hp=new THREE.Vec
 function snap(){const f=document.getElementById('flash');sfx('snap');renderer.render(scene,camera);const src=renderer.domElement;
  const c=document.createElement('canvas');c.width=src.width;c.height=src.height;const x=c.getContext('2d');x.drawImage(src,0,0);
  const s=c.width/420;x.shadowColor='rgba(0,0,0,.6)';x.shadowBlur=8*s;x.fillStyle='rgba(233,205,138,.98)';x.textAlign='right';
- x.font=`${17*s}px "Noto Serif KR",serif`;x.fillText('🏬 온라인 백화점',c.width-14*s,c.height-30*s);
+ x.font=`${17*s}px "Noto Serif KR",serif`;x.fillText('🏬 EMPIRE 쇼핑몰',c.width-14*s,c.height-30*s);
  x.font=`${11*s}px ${FONT}`;x.fillStyle='rgba(255,255,255,.85)';x.fillText(myName+'님의 명품관 한 컷',c.width-14*s,c.height-13*s);
  f.classList.add('on');requestAnimationFrame(()=>requestAnimationFrame(()=>f.classList.remove('on')));
  c.toBlob(b=>{if(!b){toast('📸 저장 실패 — 화면 캡처로 찍어주세요');return;}const url=URL.createObjectURL(b),a=document.createElement('a');a.href=url;a.download='온라인백화점_'+Date.now()+'.png';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),4000);toast('📸 사진 저장!');},'image/png');}
@@ -536,7 +536,7 @@ function bindUI(){const $=id=>document.getElementById(id);
   audioStart();$('enter').classList.add('hide');setTimeout(()=>$('enter').remove(),800);
   $('hud').classList.add('on');$('bar').classList.add('on');entered=true;netStart();
   camGoal={a:0,t:0.46,d:innerWidth<innerHeight?26:22,slow:true};
-  setTimeout(()=>say(window.deskF.f,'어서 오세요, 온라인 백화점입니다 ✨',3),1200);
+  setTimeout(()=>say(window.deskF.f,'어서 오세요, EMPIRE 쇼핑몰입니다 ✨',3),1200);
   setTimeout(()=>toast('🏬 아래 🚀쿠팡관 · ✈️알리관 · 🛍️네이버관 버튼 → 바로 주문서'),2600);
   setTimeout(()=>toast('👆 매장을 콕 눌러도 주문서가 열려요 · 화면 끌면 360°'),6600);};}
 function recolorPlayer(){const old=player.f;const p=old.position.clone(),r=old.rotation.y;
