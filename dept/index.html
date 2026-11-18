@@ -232,7 +232,7 @@ const HALLS=[
   disc:'이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.',btn:'쿠팡에서 보기',css:'linear-gradient(135deg,#7a0c1d,#c8102e)'},
  {id:'ali',name:'알리관',file:'알리',emoji:'✈️',color:0xc2410c,glow:0xff8a3a,ang:Math.PI*0.68,sub:'GLOBAL SELECT',
   disc:'알리익스프레스 링크는 애드픽 제휴 광고 링크이며, 링크를 통해 구매하면 일정액의 수수료를 받을 수 있습니다.',btn:'알리에서 보기',css:'linear-gradient(135deg,#8a2c06,#e8590c)'},
- {id:'naver',name:'네이버관',file:'네이버',emoji:'🛍️',color:0x067a3a,glow:0x3ae08a,ang:-Math.PI*0.68,sub:'GREEN EDITION',
+ {id:'naver',name:'네이버관',file:'네이버',emoji:'🛍️',color:0x067a3a,glow:0x3ae08a,ang:-Math.PI*0.68,sub:'GREEN EDITION · 입점 대기중',wait:true,
   disc:'네이버관 상품은 리아과학 블로그 글로 연결됩니다. 그 글의 네이버 쇼핑 커넥트 링크로 구매하면 판매 수수료를 받을 수 있습니다.',btn:'네이버에서 보기',css:'linear-gradient(135deg,#04512a,#03a454)'},
 ];
 const CONCIERGE_LINES=['어서 오세요, 온라인 백화점입니다','주문은 아래 주문서에서 하시면 됩니다','오늘의 세일은 주문서 맨 위에 있어요','천천히 둘러보세요 ✨'];
@@ -475,6 +475,7 @@ function openHall(h,walk){curHall=h;const $=id=>document.getElementById(id);
  if(walk!==false){const fx=Math.sin(h.ang)*(R_WALK-1.2),fz=Math.cos(h.ang)*(R_WALK-1.2);goto(fx,fz,()=>{player.f.rotation.y=h.ang;});}
  setTimeout(()=>say(h.concierge.f,pick(['어서 오세요, '+h.name+'입니다 ✨','오늘의 세일은 맨 위에 있어요','천천히 골라보세요']),2.6),300);}
 function renderOrders(h){const box=document.getElementById('oList');box.textContent='';const rows=orders[h.id];
+ if(h.wait){const p=document.createElement('div');p.className='oEmpty';p.textContent=h.emoji+' '+h.name+' 입점 대기중입니다. 곧 오픈해요 ✨';box.appendChild(p);return;}
  if(rows===null){const p=document.createElement('div');p.className='oEmpty';p.textContent='주문서 불러오는 중…';box.appendChild(p);return;}
  if(!rows.length){const p=document.createElement('div');p.className='oEmpty';p.textContent='아직 진열된 상품이 없어요. 곧 채워집니다 ✨';box.appendChild(p);return;}
  const cats=[];rows.forEach(r=>{if(!cats.includes(r.cat))cats.push(r.cat);});
