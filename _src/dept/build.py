@@ -22,11 +22,11 @@ fig = rep(fig, "if(f){mesh(new THREE.SphereGeometry(0.13,14,10),hair,0,0.04,-0.3
           "if(f&&o.bow){mesh(new THREE.SphereGeometry(0.14,14,10),hair,0,0.1,-0.3,head);const bw=M(0xfbf8f2,0.9);for(const s of [-1,1]){const l=mesh(new THREE.SphereGeometry(0.1,10,8),bw,s*0.1,0.2,-0.33,head);l.scale.set(1.2,0.75,0.45);l.rotation.z=s*0.5;}mesh(new THREE.SphereGeometry(0.045,8,8),bw,0,0.2,-0.36,head);}\n else if(f){mesh(new THREE.SphereGeometry(0.13,14,10),hair,0,0.04,-0.33,head);const pin=")
 
 # 오디오: 술집 템포 · 거리 소음 작게 · 효과음 추가
-fxau = rep(fxau, "wg.gain.value=0.34;", "wg.gain.value=0.11;")
-fxau = rep(fxau, "lg.gain.value=0.22;", "lg.gain.value=0.05;")
-fxau = rep(fxau, "const SP=60/72/2;", "const SP=60/80/2;")
+fxau = rep(fxau, "wg.gain.value=0.34;", "wg.gain.value=0.04;")
+fxau = rep(fxau, "lg.gain.value=0.22;", "lg.gain.value=0.02;")
+fxau = rep(fxau, "const SP=60/72/2;", "const SP=60/60/2;")
 fxau = rep(fxau, "const CH=[[53,57,60,64],[52,55,59,62],[50,53,57,60],[48,52,55,59,62]],PENTA=[72,74,76,79,81,84,86];",
-          "const CH=[[48,52,55,59,62],[45,48,52,55,59],[50,53,57,60,64],[43,47,50,53,57]],PENTA=[71,72,74,76,79,81];")
+          "const CH=[[53,57,60,64,67],[52,55,59,62,66],[50,53,57,60,64],[55,59,62,65,69]],PENTA=[72,76,79,81,83,86,88];")
 fxau = rep(fxau, " if(kind==='step'){tone(300,0.08,'sine',0.05);}}",
  """ if(kind==='step'){tone(300,0.08,'sine',0.05);}
  if(kind==='clink'){[2637,3136,3951].forEach((f,i)=>tone(f,0.5,'sine',0.09,i*0.012));tone(2093,0.35,'triangle',0.05,0.09);[2637,3520].forEach((f,i)=>tone(f,0.4,'sine',0.06,0.14+i*0.01));}
