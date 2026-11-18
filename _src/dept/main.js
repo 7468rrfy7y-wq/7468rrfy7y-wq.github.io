@@ -37,13 +37,13 @@ function init(){
  document.getElementById('app').appendChild(renderer.domElement);
  camera=new THREE.PerspectiveCamera(42,innerWidth/innerHeight,0.1,400);
  raycaster=new THREE.Raycaster();pointer=new THREE.Vector2();
- glowTex=glowTexture();tmpV=new THREE.Vector3();camLook=new THREE.Vector3(0,1.2,1);
+ glowTex=glowTexture();tmpV=new THREE.Vector3();camLook=new THREE.Vector3(0,1.2,8);
  scene.add(new THREE.HemisphereLight(0x8a90b8,0x1a120c,0.45));
  scene.add(new THREE.AmbientLight(0xffe2b8,0.22));
  const key=new THREE.DirectionalLight(0xfff0d8,0.6);key.position.set(6,24,10);key.castShadow=true;
  key.shadow.mapSize.set(2048,2048);const sc=key.shadow.camera;sc.left=-26;sc.right=26;sc.top=26;sc.bottom=-26;sc.near=1;sc.far=60;key.shadow.bias=-0.0005;key.shadow.normalBias=0.02;
  scene.add(key);
- buildSky();buildAtrium();HALLS.forEach(buildHall);buildLobby();buildStaff();buildPeople();
+ buildSky();buildAtrium();HALLS.forEach(buildHall);buildLobby();buildTree();buildStaff();buildPeople();
  const mk=new THREE.Mesh(new THREE.RingGeometry(0.22,0.32,32),new THREE.MeshBasicMaterial({color:0xe8c77a,transparent:true,opacity:0,side:THREE.DoubleSide,depthWrite:false}));
  mk.rotation.x=-Math.PI/2;mk.position.y=0.03;scene.add(mk);moveMarker=mk;
  const el=renderer.domElement;
@@ -212,26 +212,60 @@ function buildLobby(){
  occ(pg,1.5);OBST.push({x:-9.4,z:2,r:1.3});
 }
 
+/* ---------------- 크리스마스 트리 (중앙) ---------------- */
+const TREE={lights:null};
+function buildTree(){const g=new THREE.Group();g.position.set(-5.4,0,15.4);scene.add(g);
+ const green=new THREE.MeshStandardMaterial({color:0x1d4a2c,roughness:0.75,flatShading:true});
+ mesh(new THREE.CylinderGeometry(0.22,0.3,0.9,10),new THREE.MeshStandardMaterial({color:0x4a2e1a,roughness:0.9}),0,0.45,0,g);
+ mesh(new THREE.CylinderGeometry(1.05,1.15,0.5,32),GOLD(),0,0.25,0,g);
+ const tiers=[[2.3,2.2,1.0],[1.85,2.0,2.3],[1.4,1.8,3.5],[0.95,1.6,4.6],[0.5,1.3,5.6]];
+ tiers.forEach(([r,h,y])=>{const c=mesh(new THREE.ConeGeometry(r,h,14),green,0,y+h/2,0,g);c.castShadow=true;});
+ // 오너먼트 (한 번에 그림)
+ const N=46,im=new THREE.InstancedMesh(new THREE.SphereGeometry(0.11,10,8),new THREE.MeshStandardMaterial({metalness:0.6,roughness:0.25}),N);
+ const m4=new THREE.Matrix4(),col=new THREE.Color(),cs=[0xd8b36a,0xb3122a,0xf3efe8,0xc9a24e];
+ for(let i=0;i<N;i++){const y=1.2+Math.random()*5.0,rr=(1-(y-1.0)/5.6)*2.1+0.05,a=Math.random()*6.283;m4.makeTranslation(Math.sin(a)*rr,y,Math.cos(a)*rr);im.setMatrixAt(i,m4);im.setColorAt(i,col.set(pick(cs)));}
+ g.add(im);
+ // 전구 (점 하나로)
+ const L=160,pos=new Float32Array(L*3),cl=new Float32Array(L*3);
+ for(let i=0;i<L;i++){const q=i/L,y=1.1+q*5.5,rr=(1-(y-1.0)/5.8)*2.2+0.08,a=q*Math.PI*2*7;pos.set([Math.sin(a)*rr,y,Math.cos(a)*rr],i*3);col.set(pick([0xfff0c8,0xffd37a,0xffffff]));cl.set([col.r,col.g,col.b],i*3);}
+ const bg=new THREE.BufferGeometry();bg.setAttribute('position',new THREE.BufferAttribute(pos,3));bg.setAttribute('color',new THREE.BufferAttribute(cl,3));
+ TREE.lights=new THREE.Points(bg,new THREE.PointsMaterial({size:0.16,vertexColors:true,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,map:glowTex}));g.add(TREE.lights);
+ glowSprite(0xffe08a,1.6,g,0,7.25,0,0.95);
+ const st=new THREE.Shape();for(let i=0;i<10;i++){const a=i/10*Math.PI*2,r=i%2?0.16:0.38;st[i?'lineTo':'moveTo'](Math.sin(a)*r,Math.cos(a)*r);}
+ const star=new THREE.Mesh(new THREE.ExtrudeGeometry(st,{depth:0.08,bevelEnabled:false}),new THREE.MeshStandardMaterial({color:0xffd86a,emissive:0xffb830,emissiveIntensity:1.2,metalness:0.4,roughness:0.3}));
+ star.position.set(0,7.2,-0.04);g.add(star);spinners.push(star);
+ const tl=new THREE.PointLight(0xffd59a,0.7,12,1.6);tl.position.set(0,3.5,1.5);g.add(tl);
+ occ(g,2.3);OBST.push({x:-5.4,z:15.4,r:2.0});}
+
 /* ---------------- 직원 의전 (입구 일렬 · 90도 인사) ---------------- */
 function makeStaff(look){const f=makeFigure(look);f.updateMatrixWorld(true);const u=f.userData,rig=u.rig,up=new THREE.Group();up.position.y=0.46;rig.add(up);up.updateMatrixWorld(true);
  rig.children.slice().forEach(c=>{if(c!==up&&!u.legs.includes(c))up.attach(c);});u.up=up;return f;}
-function buildStaff(){const lk=i=>({robe:0x0d0d10,top:0xf7f3ea,hair:i%3?0x1c1612:0x2e2016,skin:i%2?0xf4cfa8:0xeec39a,style:i%2?'f':'p',ribbon:0xd8b36a});
- let n=0;for(const side of [-1,1])for(let k=0;k<10;k++){const f=makeStaff(lk(n));f.traverse(m=>{if(m.isMesh)m.castShadow=false;});f.position.set(side*1.55,0,13.4-k*0.95);f.rotation.y=-side*Math.PI/2;scene.add(f);
-  addBubble(f,2.45);OBST.push({x:f.position.x,z:f.position.z,r:0.32});STAFF.push({f,bow:0,cd:0,delay:0,k});n++;}}
+const STAFF_DOOR=[0,6.5];
+function buildStaff(){const lk=(k,sd)=>{const w=(k+(sd>0?1:0))%2;return {robe:0x0d0d10,top:0xf7f3ea,hair:k%3?0x1c1612:0x2e2016,skin:w?0xf4cfa8:0xeec39a,style:w?'f':'p',ribbon:0xd8b36a};};
+ let n=0;for(let k=0;k<5;k++)for(const side of [-1,1]){const f=makeStaff(lk(k,side));f.traverse(m=>{if(m.isMesh)m.castShadow=false;});
+  f.position.set(STAFF_DOOR[0],0,STAFF_DOOR[1]);f.visible=false;scene.add(f);addBubble(f,2.45);
+  STAFF.push({f,k,side,i:n,ph:'home',t:0,bow:0,sx:side*1.45,sz:20.0-k*1.6});n++;}}
 let lastBow=-99,lastPeers=0;
-function bowAll(){const now=performance.now()/1000;if(now-lastBow<4)return;lastBow=now;
- STAFF.forEach(s=>{s.delay=0.15+s.k*0.12;s.bow=0;s.cd=6;setTimeout(()=>say(s.f,'고객님 사랑합니다 💛',2.2),(0.3+s.k*0.12)*1000);});sfx('chime');}
-function staffTick(t,dt){const pp=player.f.position;if(entered&&NET.peers.size>lastPeers)bowAll();lastPeers=NET.peers.size;
- STAFF.forEach(s=>{const u=s.f.userData;u.mode='stand';animFig(s.f,t,dt,false);s.cd-=dt;
-  if(s.delay>0){s.delay-=dt;if(s.delay<=0)s.bow=0.0001;}
-  else if(!s.bow&&s.cd<=0&&entered&&Math.hypot(pp.x-s.f.position.x,pp.z-s.f.position.z)<1.9){s.bow=0.0001;s.cd=7;if(Math.random()<0.5)say(s.f,pick(['안녕하십니까 🙇','어서 오십시오','감사합니다 🙇']),2);}
-  let a=0;if(s.bow){s.bow+=dt;const T=s.bow;a=T<0.45?T/0.45:T<1.6?1:T<2.1?1-(T-1.6)/0.5:0;if(T>=2.1)s.bow=0;}
-  const e=a*a*(3-2*a);u.up.rotation.x=e*1.45;u.arms.forEach(m=>m.rotation.x=-e*0.25);u.head.rotation.x=e*0.2;});}
+function bowAll(){const now=performance.now()/1000;if(now-lastBow<9)return;lastBow=now;sfx('chime');
+ STAFF.forEach(s=>{s.ph='wait';s.t=s.i*0.14;s.f.position.set(STAFF_DOOR[0],0,STAFF_DOOR[1]);});}
+function staffTick(t,dt){if(entered&&NET.peers.size>lastPeers)bowAll();lastPeers=NET.peers.size;
+ STAFF.forEach(s=>{const f=s.f,u=f.userData,p=f.position;
+  if(s.ph==='home'){f.visible=false;return;}
+  const go=(x,z,sp)=>{const dx=x-p.x,dz=z-p.z,d=Math.hypot(dx,dz);if(d<0.05)return true;const st=Math.min(sp*dt,d);p.x+=dx/d*st;p.z+=dz/d*st;
+   f.rotation.y+=angDiff(f.rotation.y,Math.atan2(dx,dz))*Math.min(1,dt*12);u.mode='walk';return false;};
+  let a=0;
+  if(s.ph==='wait'){s.t-=dt;if(s.t<=0){s.ph='out';f.visible=true;}}
+  else if(s.ph==='out'){if(go(s.sx,s.sz,4.2)){s.ph='turn';s.t=0;}}
+  else if(s.ph==='turn'){u.mode='stand';f.rotation.y+=angDiff(f.rotation.y,-s.side*Math.PI/2)*Math.min(1,dt*10);s.t+=dt;if(s.t>0.35&&STAFF.every(q=>q.ph!=='wait'&&q.ph!=='out')){s.ph='bow';s.t=0;if(s.i===0||s.i===1)sfx('chime');}}
+  else if(s.ph==='bow'){u.mode='stand';s.t+=dt;const T=s.t-s.k*0.14;if(s.i===0&&T>0&&!s.said){s.said=1;say(f,'고객님 사랑합니다 💛 — 직원 일동',2.8);}
+   a=T<=0?0:T<0.45?T/0.45:T<1.8?1:T<2.3?1-(T-1.8)/0.5:0;if(s.t>4.2){s.ph='back';s.said=0;}}
+  else if(s.ph==='back'){if(go(STAFF_DOOR[0],STAFF_DOOR[1],4.6)){s.ph='home';f.visible=false;}}
+  if(f.visible){animFig(f,t,dt,false);const e=a*a*(3-2*a);u.up.rotation.x=e*1.45;if(a>0)u.arms.forEach(m=>m.rotation.x=-e*0.25);u.head.rotation.x=e*0.2;}});}
 
 /* ---------------- 사람들 ---------------- */
-const WAYPTS=[[0,4],[-4,2.6],[4,2.6],[0,-2.6],[-6.5,-4],[6.5,-4],[-8,5],[8,5],[-4.2,9],[4.2,9],[-9,-8],[9,-8],[0,-8],[-10,0],[10,0]];
+const WAYPTS=[[0,4],[-4,2.6],[4,2.6],[0,-2.6],[-6.5,-4],[6.5,-4],[-8,5],[7,7.5],[-4.2,9],[4.2,9],[-9,-8],[9,-8],[0,-8],[-10,0],[11.5,-3.5]];
 function buildPeople(){
- player=mkAgent(makeFigure({robe:myColor,top:0xf6efe4,hair:0x2a2018,skin:0xf2c9a0,style:'p',ribbon:0xd8b36a}),rnd(-0.4,0.4),rnd(13.6,14.4),3.2);
+ player=mkAgent(makeFigure({robe:myColor,top:0xf6efe4,hair:0x2a2018,skin:0xf2c9a0,style:'p',ribbon:0xd8b36a}),rnd(-0.3,0.3),rnd(20.4,20.8),3.2);
  addTag(player.f,myName,0,1.98,false);addBubble(player.f,2.5);player.f.rotation.y=Math.PI;
  const looks=[{robe:0xf4efe6,top:0x1a1a1a,hair:0x2a1a10,skin:0xf6d2b0,style:'f',ribbon:0xb08d57},{robe:0x1f3a5f,top:0xf4efe6,hair:0x161210,skin:0xe8bf95,style:'p',ribbon:0xd8b36a},
   {robe:0x7a1f2b,top:0xf4efe6,hair:0x4a3020,skin:0xf6d2b0,style:'f',ribbon:0xd8b36a},{robe:0x3d5a45,top:0xf0ece4,hair:0x1e1a17,skin:0xf0c8a0,style:'p',ribbon:0xb08d57}];

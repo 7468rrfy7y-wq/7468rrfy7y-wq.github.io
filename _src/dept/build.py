@@ -39,6 +39,27 @@ net = rep(net, "const PHRASES=['안녕하세요 👋','반가워요 😊','사�
           "const PHRASES=['안녕하세요 👋','여기 명품관 같다 ✨','세일 뭐 있어요?','쿠팡관 가봐요 🚀','알리관 구경 ✈️','네이버관 고급지다 🛍️','같이 사진 찍어요 📸','또 만나요 👋'];")
 net = rep(net, "topic:'yangjapalja-cafe/v2/oceanview'", "topic:'lia-online-department/v1/main'")
 net = rep(net, "toast('👥 같이 접속 연결됨 · 다른 손님들이 보여요');", "toast('👥 같이 접속 연결됨 · 다른 손님들도 쇼핑 중이에요');")
+
+# 캐롤: 징글벨(1857, 저작권 만료) 라운지 편곡 — 멜로디·코드·방울 전부 합성
+fxau = rep(fxau, "const tick=()=>{if(!AU.ctx)return;while(next<ctx.currentTime+0.35){const s=step%32,bar=Math.floor(step/8)%4;", "const tickOld=()=>{if(!AU.ctx)return;while(next<ctx.currentTime+0.35){const s=step%32,bar=Math.floor(step/8)%4;")
+fxau = rep(fxau, " AU.timer=setInterval(tick,90);", """ const B=60/100;
+ const nE=76,nG=79,nC=72,nD=74,nF=77;
+ const MEL=[[nE,1],[nE,1],[nE,2],[nE,1],[nE,1],[nE,2],[nE,1],[nG,1],[nC,1.5],[nD,.5],[nE,4],
+  [nF,1],[nF,1],[nF,1.5],[nF,.5],[nF,1],[nE,1],[nE,1],[nE,.5],[nE,.5],[nE,1],[nD,1],[nD,1],[nE,1],[nD,2],[nG,2],
+  [nE,1],[nE,1],[nE,2],[nE,1],[nE,1],[nE,2],[nE,1],[nG,1],[nC,1.5],[nD,.5],[nE,4],
+  [nF,1],[nF,1],[nF,1.5],[nF,.5],[nF,1],[nE,1],[nE,1],[nE,.5],[nE,.5],[nG,1],[nG,1],[nF,1],[nD,1],[nC,4]];
+ const CHD={C:[48,52,55,59],F:[53,57,60,64],D7:[50,54,57,60],G7:[43,47,50,53]};
+ const PROG=['C','C','C','C','F','C','D7','G7','C','C','C','C','F','C','G7','C'];
+ const nb=ctx.createBuffer(1,Math.floor(ctx.sampleRate*0.14),ctx.sampleRate),nd=nb.getChannelData(0);for(let i=0;i<nd.length;i++)nd[i]=(Math.random()*2-1)*Math.pow(1-i/nd.length,3);
+ const shk=(t,v)=>{const s=ctx.createBufferSource(),hp=ctx.createBiquadFilter(),g=ctx.createGain();s.buffer=nb;hp.type='highpass';hp.frequency.value=6500;g.gain.value=v;s.connect(hp);hp.connect(g);g.connect(mus);s.start(t);};
+ let mi=0,mt=ctx.currentTime+0.5,bt=mt,beat=0;
+ const tick=()=>{if(!AU.ctx)return;const hz=ctx.currentTime+0.4;
+  while(mt<hz){const [n,d]=MEL[mi];note(mf(n),mt,d*B*0.9+0.25,'triangle',0.075,0.01);note(mf(n+12),mt,0.7,'sine',0.022,0.004);mt+=d*B;mi=(mi+1)%MEL.length;}
+  while(bt<hz){const bar=Math.floor(beat/4)%16,bb=beat%4,c=CHD[PROG[bar]];
+   if(bb===0){c.forEach(n=>note(mf(n+12),bt,B*3.8,'sine',0.03,0.12));note(mf(c[0]-12),bt,B*1.8,'sine',0.11,0.02);}
+   if(bb===2)note(mf(c[2]-12),bt,B*1.8,'sine',0.08,0.02);
+   shk(bt,bb%2?0.07:0.035);shk(bt+B/2,0.025);bt+=B;beat++;}};
+ AU.timer=setInterval(tick,90);""")
 main = open('main.js', encoding='utf-8').read()
 
 html = open('shell.html', encoding='utf-8').read()
